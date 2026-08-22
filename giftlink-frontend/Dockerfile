@@ -1,7 +1,6 @@
 FROM node:18-alpine AS build
 WORKDIR /app
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=https://giftlink-backend.2dtajexbxpfh.us-south.codeengine.appdomain.cloud
 COPY package*.json ./
 RUN npm install
 COPY . .
