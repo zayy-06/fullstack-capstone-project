@@ -1,0 +1,47 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build backend Docker image
+        run: |
+          docker build ./giftlink-backend \
+            --file ./giftlink-backend/Dockerfile \
+            --tag giftlink-backend:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build frontend Docker image
+        run: |
+          docker build ./giftlink-frontend \
+            --file ./giftlink-frontend/Dockerfile \
+            --tag giftlink-frontend:latest
+
+  build-sentiment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build sentiment Docker image
+        run: |
+          docker build ./sentiment \
+            --file ./sentiment/Dockerfile \
+            --tag sentiment:latest
